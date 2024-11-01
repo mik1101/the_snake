@@ -34,9 +34,7 @@ clock = pygame.time.Clock()
 
 
 class GameObject:
-    """GameObject — базовый класс, от которого наследуются другие 
-    объекты.
-    """
+    """GameObject — базовый класс"""
 
     def __init__(self):
         """Конструктор класса GameObject."""
@@ -44,11 +42,9 @@ class GameObject:
         self.body_color = None
 
     def draw(self):
-        """Это метод - пустышка, который предназначен для переопределения 
-        в дочерних классах.
-        """
-        raise NotImplementedError(
-            f'Определите draw в {self.__class__.__name__}.')    
+        """Метод - пустышка, для переопределения в дочерних классах"""
+        output_error = f'Определите draw в {self.__class__.__name__}.'
+        raise NotImplementedError(output_error)
 
 
 class Apple(GameObject):
