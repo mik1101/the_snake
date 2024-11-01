@@ -34,17 +34,21 @@ clock = pygame.time.Clock()
 
 
 class GameObject:
-     """GameObject — базовый класс"""
+    """GameObject — базовый класс, от которого наследуются другие 
+    объекты.
+    """
+
     def __init__(self):
-        """Конструктор класса GameObject"""
+        """Конструктор класса GameObject."""
         self.position = [(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)]
         self.body_color = None
 
-
     def draw(self):
         """Это метод - пустышка, который предназначен для переопределения 
-        в дочерних классах."""
-        raise NotImplementedError(f'Определите draw в {self.__class__.__name__}.')    
+        в дочерних классах.
+        """
+        raise NotImplementedError(
+            f'Определите draw в {self.__class__.__name__}.')    
 
 
 class Apple(GameObject):
@@ -110,17 +114,18 @@ class Snake(GameObject):
         self.last = self.positions.pop()
 
     def draw(self):
+        """Отрисовка змейки"""
         for position in self.positions[:-1]:
             rect = pygame.Rect(position, (GRID_SIZE, GRID_SIZE))
             pygame.draw.rect(screen, self.body_color, rect)
             pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
-        """Отрисовка головы змейки"""
+        # Отрисовка головы змейки
         head_rect = pygame.Rect(self.positions[0], (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(screen, self.body_color, head_rect)
         pygame.draw.rect(screen, BORDER_COLOR, head_rect, 1)
 
-        """Затирание последнего сегмента"""
+        # Затирание последнего сегмента
         if self.last:
             last_rect = pygame.Rect(self.last, (GRID_SIZE, GRID_SIZE))
             pygame.draw.rect(screen, BOARD_BACKGROUND_COLOR, last_rect)
